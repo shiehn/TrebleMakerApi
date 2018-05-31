@@ -1,0 +1,72 @@
+<div ng-controller="AmbienceLoopsCtrl" id="pageWrapper">
+
+  <input type="file" file-upload multiple onchange="angular.element(this).scope().handleFileSelected(this)" />
+
+  <br />
+
+  <div style="border: 1px solid orange; font-size: 11px;">
+    <div ng-repeat='genre in genres' style="float:left;padding-right:5px;">
+      <label>
+        <input ng-model='genre.checked' type='checkbox'>
+        {{genre.Genre}}
+      </label>
+    </div>
+  </div>
+
+  <div style="border: 1px solid orange; font-size: 11px;">
+    <b>STATION</b>: <select data-ng-options="id as id for id in stationids" data-ng-model="selectedstationid"></select> <br />
+  </div>
+
+  <br />
+  <br />
+
+  <div style="border: 1px solid black; font-size: 11px;">
+    <div ng-repeat='characteristic in characteristics' style="float:left;padding-right:5px;">
+      <label>
+        <input ng-model='characteristic.checked' type='checkbox'>
+        {{characteristic.Characteristic}}
+      </label>
+    </div>
+  </div>
+
+  <br />
+  <br />
+
+  genre: <select data-ng-options="o.name for o in genreOptions" data-ng-model="selectedGenreOption"></select> <br />
+  complexity: <select data-ng-options="o.name for o in complexityOptions" data-ng-model="selectedComplexityOption"></select> <br />
+  mooddark: <select data-ng-options="o.name for o in mooddarkOptions" data-ng-model="selectedMoodDarkOption"></select> <br />
+  moodligh: <select data-ng-options="o.name for o in moodlightOptions" data-ng-model="selectedMoodLightOption"></select> <br />
+  AudioLength : <select data-ng-options="o.name for o in audioLengthOptions" data-ng-model="selectedAudioLengthOption"></select> <br />
+
+  <br />
+
+  RootOne:
+  <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="selectedRootOneOption" ng-change="handleChordSelected()"></select>
+  <br />
+
+  RootTwo:
+  <select data-ng-options="o.Chord for o in rootTwoOptions" data-ng-model="selectedRootTwoOption" ng-change="handleChordSelected()"></select>
+  <br />
+
+  RootThree:
+  <select data-ng-options="o.Chord for o in rootThreeOptions" data-ng-model="selectedRootThreeOption" ng-change="handleChordSelected()"></select>
+  <br />
+
+  RootFour:
+  <select data-ng-options="o.Chord for o in rootFourOptions" data-ng-model="selectedRootFourOption" ng-change="handleChordSelected()"></select>
+
+  <br />
+  <br />
+  <button ng-click="test()">TEST</button>
+
+  <br />
+
+  <button ng-click="stopAudioLoop()">STOP</button>
+
+  <br />
+  <button ng-click="save()">SAVE</button>
+
+  <div my-dom-directive></div>
+
+</div>
+

@@ -1,0 +1,61 @@
+{
+  "eqbands": [
+    {
+      "freq": "freq_20",
+      "target": {
+        "rating": "bad",
+        "beat_loop": 50.35345,
+        "harmonic_loop": 50.56456,
+        "synth_mid": 50.6465
+      },
+      "rows": [
+        {
+          "rating": "bad",
+          "beat_loop": 15.35345,
+          "harmonic_loop": 12.56456,
+          "synth_mid": 4.6465
+        },
+        {
+          "rating": "good",
+          "beat_loop": 98.35345,
+          "harmonic_loop": 88.56456,
+          "synth_mid": 79.6465
+        },
+        {
+          "rating": "ok",
+          "beat_loop": 45.35345,
+          "harmonic_loop": 44.56456,
+          "synth_mid": 66.6465
+        },
+        {
+          "rating": "bad",
+          "beat_loop": 5.35345,
+          "harmonic_loop": 11.56456,
+          "synth_mid": 22.6465
+        },
+        {
+          "rating": "bad",
+          "beat_loop": 33.35345,
+          "harmonic_loop": 3.56456,
+          "synth_mid": 23.6465
+        },
+        {
+          "rating": "good",
+          "beat_loop": 98.35345,
+          "harmonic_loop": 78.56456,
+          "synth_mid": 88.6465
+        },
+        {
+          "rating": "ok",
+          "beat_loop": 50.35345,
+          "harmonic_loop": 45.56456,
+          "synth_mid": 65.6465
+        },
+        {
+          "rating": "bad",
+          "beat_loop": 4.35345,
+          "harmonic_loop": 22.56456,
+          "synth_mid": 12.6465
+        }]
+    }]
+}

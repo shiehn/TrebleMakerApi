@@ -1,0 +1,150 @@
+<div ng-controller="HarmonicLoopsCtrl" id="pageWrapper">
+
+  <b>STATION</b>: <select data-ng-options="id as id for id in stationids" data-ng-model="selectedstationid"></select> <br />
+
+  <input type="file" file-upload multiple onchange="angular.element(this).scope().handleFileSelected(this)" />
+
+  <br />
+
+  <div style="border: 1px solid black; font-size: 11px;">
+    <div ng-repeat='genre in genres' style="float:left;padding-right:5px;">
+      <label>
+        <input ng-model='genre.checked' type='checkbox'>
+        {{genre.Genre}}
+      </label>
+    </div>
+  </div>
+
+  <br />
+  <br />
+
+  <div style="border: 1px solid black; font-size: 11px;">
+    <div ng-repeat='characteristic in characteristics' style="float:left;padding-right:5px;">
+      <label>
+        <input ng-model='characteristic.checked' type='checkbox'>
+        {{characteristic.Characteristic}}
+      </label>
+    </div>
+  </div>
+
+  <br />
+  <br />
+
+  <div style="border: 1px solid black; font-size: 11px;">
+    <div ng-repeat='instrument in instruments' style="float:left;padding-right:5px;">
+      <label>
+        <input ng-model='instrument.checked' type='checkbox'>
+        {{instrument.Instrument}}
+      </label>
+    </div>
+  </div>
+
+
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+
+  Complexity:
+  <select data-ng-options="o.name for o in complexityOptions" data-ng-model="selectedComplexityOption"></select>
+  <br />
+  MoodLight:
+  <select data-ng-options="o.name for o in moodlightOptions" data-ng-model="selectedMoodLightOption"></select>
+  <br />
+  MoodDark:
+  <select data-ng-options="o.name for o in mooddarkOptions" data-ng-model="selectedMoodDarkOption"></select>
+  <br />
+
+  <br>RECOMENDED BPM: {{recomendedBpm}}
+  <br>
+
+  BPM :
+  <select data-ng-options="o.name for o in bpmOptions" data-ng-model="selectedBpmOption" ng-change="updateWavView()"></select>
+  <br />
+
+  <br />
+  <br />
+
+  <input type="checkbox"
+         ng-model="lockSelections"
+         name="LOCK CHORDS">
+
+  <br>
+  RootOne:
+  <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="selectedRootOneOption" ng-change="handleChordSelected()"></select>
+  <br />
+
+  RootOne Type:
+  <select data-ng-options="o.Chord for o in rootTwoOptions" data-ng-model="selectedRootTwoOption" ng-change="handleChordSelected()"></select>
+  <br />
+
+  RootTwo:
+  <select data-ng-options="o.Chord for o in rootThreeOptions" data-ng-model="selectedRootThreeOption" ng-change="handleChordSelected()"></select>
+  <br />
+
+  RootTwo Type:
+  <select data-ng-options="o.Chord for o in rootFourOptions" data-ng-model="selectedRootFourOption" ng-change="handleChordSelected()"></select>
+  <br />
+
+  <br />
+  <br />
+
+  <button ng-click="test()">Test</button>
+
+  <br />
+
+  <br>
+  <b>Rendered Sample:</b>
+  <br>{{renderedSample}}
+  <br>
+
+  <br />
+
+  <button ng-click="save()">SAVE</button>
+
+  <br>
+
+  <button ng-click="stopAudioLoop()">STOP</button>
+
+  <br /><br />
+
+  <div my-dom-directive></div>
+
+  <!-- MOVE THIS TO A FUCKING DIRECTIVE -->
+  <style>
+    .highlight {
+      background-color: black !important;
+    }
+
+    .oneBarWidth {
+      width: 6.25%;
+      height: 40px;
+    }
+
+    .twoBarWidth {
+      width: 3.125%;
+      height: 40px;
+    }
+
+    .fourBarWidth {
+      width: 1.5625%;
+      height: 40px;
+    }
+
+    .downBeat {
+      background-color: #ddd;
+    }
+  </style>
+
+  <br><br>
+  <select data-ng-options="o for o in numberOfAccentBarOptions" data-ng-model="selectedNumberOfAccentBars" ng-change="updateNumberOfAccentBars()"></select>
+  <div style="width:100%; height:30px;">
+    <div style="float:left; border: solid 1px black;" ng-class="{'highlight': x,'downBeat':$index % 4 == 0, 'oneBarWidth': selectedNumberOfAccentBars == 1, 'twoBarWidth': selectedNumberOfAccentBars == 2, 'fourBarWidth': selectedNumberOfAccentBars == 4   }" ng-model="x" ng-repeat="x in accentArray track by $index" ng-click="selectAccentCell($index)">
+
+    </div>
+  </div>
+
+  <!-- END MOVE THIS TO A FUCKING DIRECTIVE -->
+</div>
+</div>

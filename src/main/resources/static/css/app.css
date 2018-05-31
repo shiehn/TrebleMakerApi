@@ -1,0 +1,128 @@
+/* app css stylesheet */
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+/* HOME PAGE CSS */
+.feedBackWrapper {
+        width: 970px;
+        height: 130px;
+        padding: 0px;
+        margin: 0px;
+        }
+        .feedBackCell {
+        font-size: 8px;
+        width: 3.125%;
+        padding: 0px;
+        margin: 0px;
+        float: left;
+        }
+
+        .odd {
+        padding: 0px;
+        margin: 0px;
+        }
+
+        .even {
+        background-color: lightgrey;
+        padding: 0px;
+        margin: 0px;
+        }
+
+        .good {
+        background-color: green;
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        }
+
+        .ok {
+        background-color: orange;
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        }
+
+        .bad {
+        background-color: red;
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        }
+
+        .category_selected {
+        background-color: darkgray;
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        }
+
+        .category_not_selected {
+        background-color: beige;
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        }
+
+        .btn-off {
+        background-color: white;
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        }
+
+        .hstart {
+        background-color: green;
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        }
+        .hstop {
+        background-color: red;
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        }
+
+        .ingroup {
+        background-color: orange;
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        }
+
+        .nopadding {
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        }
+
+.rowButton {
+    background-color: pink;
+}

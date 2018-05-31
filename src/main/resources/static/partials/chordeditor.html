@@ -1,0 +1,89 @@
+<div ng-controller="ChordEditorCtrl" id="pageWrapper">
+    <h1>CHORD EDITOR</h1>
+
+    SongName <input ng-model="song_name"><br>
+    TimeSig <input ng-model="timesignature"><br>
+    Key <input ng-model="key"><br>
+
+    <div style="border: 1px solid black">
+        <div ng-repeat='genre in genres'>
+            <div style="float: left;">
+                <label>
+                    <input ng-model='genre.checked' type='checkbox'>
+                    {{genre.Genre}}
+                </label>
+            </div>
+        </div>
+
+        <br><h4>0</h4>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[0]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[1]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[2]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[3]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[4]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[5]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[6]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[7]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[8]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[9]" ng-change="handleChordSelected()"></select>
+        <br><h4>10</h4>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[10]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[11]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[12]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[13]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[14]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[15]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[16]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[17]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[18]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[19]" ng-change="handleChordSelected()"></select>
+        <br><h4>20</h4>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[20]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[21]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[22]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[23]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[24]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[25]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[26]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[27]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[28]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[29]" ng-change="handleChordSelected()"></select>
+        <br><h4>30</h4>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[30]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[31]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[32]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[33]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[34]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[35]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[36]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[37]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[38]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[39]" ng-change="handleChordSelected()"></select>
+        <br><h4>40</h4>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[40]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[41]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[42]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[43]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[44]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[45]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[46]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[47]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[48]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[49]" ng-change="handleChordSelected()"></select>
+        <br><h4>50</h4>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[50]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[51]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[52]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[53]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[54]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[55]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[56]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[57]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[58]" ng-change="handleChordSelected()"></select>
+        <select data-ng-options="o.Chord for o in rootOneOptions" data-ng-model="rootOneSelection[59]" ng-change="handleChordSelected()"></select>
+        <br><h4>60</h4>
+
+        <button ng-click="save()">SAVE</button>
+
+
+        <div/>

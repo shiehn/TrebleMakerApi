@@ -1,0 +1,69 @@
+<div ng-controller="SynthTemplateCtrl" id="pageWrapper">
+    <br />
+
+    Upload synth template shit
+
+    <!--
+    genre: <select data-ng-options="o.name for o in genreOptions" data-ng-model="selectedGenreOption"></select> <br />
+    complexity: <select data-ng-options="o.name for o in complexityOptions" data-ng-model="selectedComplexityOption"></select> <br />
+    mood: <select data-ng-options="o.name for o in mooddarktolightOptions" data-ng-model="selectedMoodOption"></select> <br />
+    tempo: <select data-ng-options="o.name for o in tempoOptions" data-ng-model="selectedTempoOption"></select> <br />
+    barCount: <select data-ng-options="o.name for o in barCountOptions" data-ng-model="selectedBarcountOption"></select> <br />
+    timeSignature: <select data-ng-options="o.name for o in timeSignatureOptions" data-ng-model="selectedtimeSignatureOption"></select> <br />
+        -->
+    <br /><br />
+
+    MoodDarkLevel: <select data-ng-options="o.name for o in MoodDarkLevelOptions" data-ng-model="selectedMoodDarkLevelOptions"></select> <br />
+    MoodLightLevel: <select data-ng-options="o.name for o in MoodLightLevelOptions" data-ng-model="selectedMoodLightLevelOptions"></select> <br />
+
+    Complexity: <select data-ng-options="o.name for o in complexityOptions" data-ng-model="selectedComplexityOption"></select> <br />
+
+    HiQuarterNoteCompatibility : <select data-ng-options="o.name for o in HiQuarterNoteCompatibilityOptions" data-ng-model="selectedHiQuarterNoteCompatibilityOptions"></select> <br />
+
+    HiEigthNoteCompatibility : <select data-ng-options="o.name for o in HiEigthNoteCompatibilityOptions" data-ng-model="selectedHiEigthNoteCompatibilityOptions"></select> <br />
+
+    HiSixteenthNoteCompatibility : <select data-ng-options="o.name for o in HiSixteenthNoteCompatibilityOptions" data-ng-model="selectedHiSixteenthNoteCompatibilityOptions"></select> <br />
+
+    HiQuarterNoteCompatibilityAlt : <select data-ng-options="o.name for o in HiQuarterNoteCompatibilityAltOptions" data-ng-model="selectedHiQuarterNoteCompatibilityAltOptions"></select> <br />
+
+    HiEigthNoteCompatibilityAlt : <select data-ng-options="o.name for o in HiEigthNoteCompatibilityAltOptions" data-ng-model="selectedHiEigthNoteCompatibilityAltOptions"></select> <br />
+
+    HiSixteenthNoteCompatibilityAlt : <select data-ng-options="o.name for o in HiSixteenthNoteCompatibilityAltOptions" data-ng-model="selectedHiSixteenthNoteCompatibilityAltOptions"></select> <br />
+
+    <br />
+    <br />
+
+    Hi Synth Name: <select data-ng-options="o.name for o in hiSynthsOptions" data-ng-model="hiSynthsSelection"></select>
+    <br /><br />
+    <input ng-model="hiPreset"></input>
+    <br /><br />
+    Hi Synth Alternative Name: <select data-ng-options="o.name for o in hiSynthsAltOptions" data-ng-model="hiSynthsAltSelection"></select>
+    <br /><br />
+    <input ng-model="hiPresetAlt"></input>
+    <br /><br />
+    Mid Synth Name: <select data-ng-options="o.name for o in midSynthsOptions" data-ng-model="midSynthsSelection"></select>
+    <br /><br />
+    <input ng-model="midPreset"></input>
+    <br /><br />
+    Mid Synth Alternative Name: <select data-ng-options="o.name for o in midSynthsAltOptions" data-ng-model="midSynthsAltSelection"></select>
+    <br /><br />
+    <input ng-model="midPresetAlt"></input>
+    <br /><br />
+    Low Synth Name: <select data-ng-options="o.name for o in lowSynthsOptions" data-ng-model="lowSynthsSelection"></select>
+    <br /><br />
+    <input ng-model="lowPreset"></input>
+    <br /><br />
+    Low Synth Alternative Name: <select data-ng-options="o.name for o in lowSynthsAltOptions" data-ng-model="lowSynthsAltSelection"></select>
+    <br /><br />
+    <input ng-model="lowPresetAlt"></input>
+    <br /><br />
+
+    {{audioTrackPath}}
+
+    <br /><br /><br />
+
+    <button ng-click="save()">SAVE</button>
+
+</div>
+
+

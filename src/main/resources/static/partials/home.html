@@ -1,0 +1,261 @@
+<div ng-controller="HomeCtrl">
+
+    <p>
+        <ul>
+            <li>Do not rate melody</li>
+            <li>Sequence rating is for all transitions</li>
+            <li>General rating is for overall feel (excluding melody)</li>
+            <li>bassline</li>
+            <li>kick,snare,hats become the same merged as BEAT</li>
+        </ul>
+    </p>
+
+    <button ng-click="addToStation()" ng-show="showPlayBtn">ADD TO STATION!!</button>
+    <br>
+
+    <div ng-show="showHitRatingBtns">
+        <button ng-click="setHitRatingAnalytics(0)">Rate HITS BAD</button>
+        <button ng-click="setHitRatingAnalytics(1)">Rate HITS OK</button>
+        <button ng-click="setHitRatingAnalytics(2)">Rate HITS GOOD</button>
+    </div>
+    <br>
+
+    <div ng-show="showFillRatingBtns">
+        <button ng-click="setFillRatingAnalytics(0)">Rate FILLS BAD</button>
+        <button ng-click="setFillRatingAnalytics(1)">Rate FILLS OK</button>
+        <button ng-click="setFillRatingAnalytics(2)">Rate FILLS GOOD</button>
+    </div>
+    <br>
+
+    <button ng-click="clearAll()" ng-show="showPlayBtn">RESET</button>
+    <br>
+
+    <button ng-click="composeButtonClick()" ng-show="!showPlayBtn" style="display:none;">{{buttonLabel}}</button>
+    <br>
+    <br>
+    <button ng-click="trainButtonClick()" ng-show="!showPlayBtn">{{trainButtonLabel}}</button>
+
+    <span>
+        <button ng-click="play()" ng-show="showPlayBtn">PLAY GENERATED MUSIC!!</button>
+        <button ng-click="stop()" ng-show="showPlayBtn">Stop</button>
+        <button ng-click="save()" ng-show="showPlayBtn">SAVE</button>
+    </span>
+
+    <div>
+        {{audioTrackPath}}
+    </div>
+
+    <br>
+    <div class="feedBackWrapper">
+        <div ng-repeat='timeSlot in feedBackModel' class="feedBackCell" ng-class-odd="'odd'" ng-class-even="'even'">
+
+            <button ng-class="{'category_selected' : timeSlot.HorizontalCategoryHarmonic == 1, 'category_not_selected' : timeSlot.HorizontalCategoryHarmonic != 1}"
+                    ng-click="setCategoryHarmonic(timeSlot)" class="category_not_selected">HL
+            </button>
+            <br>
+
+            <button ng-class="{'category_selected' : timeSlot.HorizontalCategoryRhythmic == 1, 'category_not_selected' : timeSlot.HorizontalCategoryRhythmic != 1}"
+                    ng-click="setCategoryRhythmic(timeSlot)" class="category_not_selected">BL
+            </button>
+            <br>
+
+            <button ng-class="{'category_selected' : timeSlot.HorizontalCategoryAmbience == 1, 'category_not_selected' : timeSlot.HorizontalCategoryAmbience != 1}"
+                    ng-click="setCategoryAmbience(timeSlot)" class="category_not_selected">A
+            </button>
+            <br>
+
+            <button ng-class="{'category_selected' : timeSlot.HorizontalCategoryFill == 1, 'category_not_selected' : timeSlot.HorizontalCategoryFill != 1}"
+                    ng-click="setCategoryFill(timeSlot)" class="category_not_selected">F
+            </button>
+            <br>
+
+            <button ng-class="{'good' : timeSlot.HorizontalRating == 2, 'btn-off' : timeSlot.HorizontalRating != 2}"
+                    ng-click="setHorizontalRatingGood(timeSlot)" class="good"><br></button>
+            <br>
+
+            <button ng-class="{'ok' : timeSlot.HorizontalRating == 1, 'btn-off' : timeSlot.HorizontalRating != 1}"
+                    ng-click="setHorizontalRatingOk(timeSlot)" class="ok"><br></button>
+            <br>
+
+            <button ng-class="{'bad' : timeSlot.HorizontalRating == 0, 'btn-off' : timeSlot.HorizontalRating != 0}"
+                    ng-click="setHorizontalRatingBad(timeSlot)" class="bad"><br></button>
+            <br>
+
+            <button ng-class="{'hstart' : timeSlot.HorizontalStart == 1, 'hstop' : timeSlot.HorizontalStop == 1, 'ingroup' : timeSlot.InGroup == 1}"
+                    ng-click="setHorizontalGroup(timeSlot)" class="nopadding">{{timeSlot.StartTime}}
+            </button>
+            <br>
+        </div>
+    </div>
+
+    <div basic-audio-player style="width:970px; height: 140px; display: block;"></div>
+
+    <div class="feedBackWrapper">
+        <div ng-repeat='timeSlot in feedBackModel' class="feedBackCell" ng-class-odd="'odd'" ng-class-even="'even'">
+            <div>{{timeSlot.StartTime}}</div>
+
+            <button ng-class="{'good' : timeSlot.Rating == 2, 'btn-off' : timeSlot.Rating != 2}"
+                    ng-click="setStateGood(timeSlot)" class="good"><br></button>
+            <br>
+            <button ng-class="{'ok' : timeSlot.Rating == 1, 'btn-off' : timeSlot.Rating != 1}"
+                    ng-click="setStateOk(timeSlot)" class="ok"><br></button>
+            <br>
+            <button ng-class="{'bad' : timeSlot.Rating == 0, 'btn-off' : timeSlot.Rating != 0}"
+                    ng-click="setStateBad(timeSlot)" class="bad"><br></button>
+            <br>
+
+            <!--EQ:-->
+
+            <!--<button ng-class="{'good' : timeSlot.EqRating == 2, 'btn-off' : timeSlot.EqRating != 2}"-->
+                    <!--ng-click="setEqStateGood(timeSlot)" class="good"><br></button>-->
+            <!--<br>-->
+            <!--<button ng-class="{'ok' : timeSlot.EqRating == 1, 'btn-off' : timeSlot.EqRating != 1}"-->
+                    <!--ng-click="setEqStateOk(timeSlot)" class="ok"><br></button>-->
+            <!--<br>-->
+            <!--<button ng-class="{'bad' : timeSlot.EqRating == 0, 'btn-off' : timeSlot.EqRating != 0}"-->
+                    <!--ng-click="setEqStateBad(timeSlot)" class="bad"><br></button>-->
+            <!--<br>-->
+
+            <!--LEVEL:-->
+
+            <!--<button ng-class="{'good' : timeSlot.LevelsRating == 2, 'btn-off' : timeSlot.LevelsRating != 2}"-->
+                    <!--ng-click="setLevelsStateGood(timeSlot)" class="good"><br></button>-->
+            <!--<br>-->
+            <!--<button ng-class="{'ok' : timeSlot.LevelsRating == 1, 'btn-off' : timeSlot.LevelsRating != 1}"-->
+                    <!--ng-click="setLevelsStateOk(timeSlot)" class="ok"><br></button>-->
+            <!--<br>-->
+            <!--<button ng-class="{'bad' : timeSlot.LevelsRating == 0, 'btn-off' : timeSlot.LevelsRating != 0}"-->
+                    <!--ng-click="setLevelsStateBad(timeSlot)" class="bad"><br></button>-->
+            <!--<br>-->
+
+            <!--PAN:-->
+
+            <!--<button ng-class="{'good' : timeSlot.PanningRating == 2, 'btn-off' : timeSlot.PanningRating != 2}"-->
+                    <!--ng-click="setPanningStateGood(timeSlot)" class="good"><br></button>-->
+            <!--<br>-->
+            <!--<button ng-class="{'ok' : timeSlot.PanningRating == 1, 'btn-off' : timeSlot.PanningRating != 1}"-->
+                    <!--ng-click="setPanningStateOk(timeSlot)" class="ok"><br></button>-->
+            <!--<br>-->
+            <!--<button ng-class="{'bad' : timeSlot.PanningRating == 0, 'btn-off' : timeSlot.PanningRating != 0}"-->
+                    <!--ng-click="setPanningStateBad(timeSlot)" class="bad"><br></button>-->
+            <!--<br>-->
+
+            <!--ARPEG:-->
+
+            <!--<button ng-class="{'good' : timeSlot.ArpeggioRating == 2, 'btn-off' : timeSlot.ArpeggioRating != 2}"-->
+                    <!--ng-click="setArpeggioStateGood(timeSlot)" class="good"><br></button>-->
+            <!--<br>-->
+            <!--<button ng-class="{'ok' : timeSlot.ArpeggioRating == 1, 'btn-off' : timeSlot.ArpeggioRating != 1}"-->
+                    <!--ng-click="setArpeggioStateOk(timeSlot)" class="ok"><br></button>-->
+            <!--<br>-->
+            <!--<button ng-class="{'bad' : timeSlot.ArpeggioRating == 0, 'btn-off' : timeSlot.ArpeggioRating != 0}"-->
+                    <!--ng-click="setArpeggioStateBad(timeSlot)" class="bad"><br></button>-->
+            <!--<br>-->
+
+            <!--COMP:-->
+
+            <!--<button ng-class="{'good' : timeSlot.CompRating == 2, 'btn-off' : timeSlot.CompRating != 2}"-->
+                    <!--ng-click="setCompStateGood(timeSlot)" class="good"><br></button>-->
+            <!--<br>-->
+            <!--<button ng-class="{'ok' : timeSlot.CompRating == 1, 'btn-off' : timeSlot.CompRating != 1}"-->
+                    <!--ng-click="setCompStateOk(timeSlot)" class="ok"><br></button>-->
+            <!--<br>-->
+            <!--<button ng-class="{'bad' : timeSlot.CompRating == 0, 'btn-off' : timeSlot.CompRating != 0}"-->
+                    <!--ng-click="setCompStateBad(timeSlot)" class="bad"><br></button>-->
+            <!--<br>-->
+
+            BASS:
+
+            <button ng-class="{'good' : timeSlot.BasslineRating == 2, 'btn-off' : timeSlot.BasslineRating != 2}"
+                    ng-click="setBasslineStateGood(timeSlot)" class="good"><br></button>
+            <br>
+            <button ng-class="{'ok' : timeSlot.BasslineRating == 1, 'btn-off' : timeSlot.BasslineRating != 1}"
+                    ng-click="setBasslineStateOk(timeSlot)" class="ok"><br></button>
+            <br>
+            <button ng-class="{'bad' : timeSlot.BasslineRating == 0, 'btn-off' : timeSlot.BasslineRating != 0}"
+                    ng-click="setBasslineStateBad(timeSlot)" class="bad"><br></button>
+            <br>
+
+            KICK:
+
+            <button ng-class="{'good' : timeSlot.KickRating == 2, 'btn-off' : timeSlot.KickRating != 2}"
+                    ng-click="setKickStateGood(timeSlot)" class="good"><br></button>
+            <br>
+            <button ng-class="{'ok' : timeSlot.KickRating == 1, 'btn-off' : timeSlot.KickRating != 1}"
+                    ng-click="setKickStateOk(timeSlot)" class="ok"><br></button>
+            <br>
+            <button ng-class="{'bad' : timeSlot.KickRating == 0, 'btn-off' : timeSlot.KickRating != 0}"
+                    ng-click="setKickStateBad(timeSlot)" class="bad"><br></button>
+            <br>
+
+            HAT:
+
+            <button ng-class="{'good' : timeSlot.HatRating == 2, 'btn-off' : timeSlot.HatRating != 2}"
+                    ng-click="setHatStateGood(timeSlot)" class="good"><br></button>
+            <br>
+            <button ng-class="{'ok' : timeSlot.HatRating == 1, 'btn-off' : timeSlot.HatRating != 1}"
+                    ng-click="setHatStateOk(timeSlot)" class="ok"><br></button>
+            <br>
+            <button ng-class="{'bad' : timeSlot.HatRating == 0, 'btn-off' : timeSlot.HatRating != 0}"
+                    ng-click="setHatStateBad(timeSlot)" class="bad"><br></button>
+            <br>
+
+            SNARE:
+
+            <button ng-class="{'good' : timeSlot.SnareRating == 2, 'btn-off' : timeSlot.SnareRating != 2}"
+                    ng-click="setSnareStateGood(timeSlot)" class="good"><br></button>
+            <br>
+            <button ng-class="{'ok' : timeSlot.SnareRating == 1, 'btn-off' : timeSlot.SnareRating != 1}"
+                    ng-click="setSnareStateOk(timeSlot)" class="ok"><br></button>
+            <br>
+            <button ng-class="{'bad' : timeSlot.SnareRating == 0, 'btn-off' : timeSlot.SnareRating != 0}"
+                    ng-click="setSnareStateBad(timeSlot)" class="bad"><br></button>
+            <br>
+        </div>
+    </div>
+
+    <span>RATING</span><button ng-click="setRow('Rating',0)" class="rowButton">BAD</button><button ng-click="setRow('Rating',1)"class="rowButton">OK</button><button ng-click="setRow('Rating',2)"class="rowButton">GOOD</button><br>
+    <!--<span>EQ</span><button ng-click="setRow('EqRating',0)"class="rowButton">BAD</button><button ng-click="setRow('EqRating',1)"class="rowButton">OK</button><button ng-click="setRow('EqRating',2)"class="rowButton">GOOD</button><br>-->
+    <!--<span>LEVEL</span><button ng-click="setRow('LevelsRating',0)"class="rowButton">BAD</button><button ng-click="setRow('LevelsRating',1)"class="rowButton">OK</button><button ng-click="setRow('LevelsRating',2)"class="rowButton">GOOD</button><br>-->
+    <!--<span>PAN</span><button ng-click="setRow('PanningRating',0)"class="rowButton">BAD</button><button ng-click="setRow('PanningRating',1)"class="rowButton">OK</button><button ng-click="setRow('PanningRating',2)"class="rowButton">GOOD</button><br>-->
+    <!--<span>ARP</span><button ng-click="setRow('ArpeggioRating',0)"class="rowButton">BAD</button><button ng-click="setRow('ArpeggioRating',1)"class="rowButton">OK</button><button ng-click="setRow('ArpeggioRating',2)"class="rowButton">GOOD</button><br>-->
+    <!--<span>COMP</span><button ng-click="setRow('CompRating',0)"class="rowButton">BAD</button><button ng-click="setRow('CompRating',1)"class="rowButton">OK</button><button ng-click="setRow('CompRating',2)"class="rowButton">GOOD</button><br>-->
+    <span>BASSLINE</span><button ng-click="setRow('BasslineRating',0)"class="rowButton">BAD</button><button ng-click="setRow('BasslineRating',1)"class="rowButton">OK</button><button ng-click="setRow('BasslineRating',2)"class="rowButton">GOOD</button><br>
+    <span>KICK</span><button ng-click="setRow('KickRating',0)"class="rowButton">BAD</button><button ng-click="setRow('KickRating',1)"class="rowButton">OK</button><button ng-click="setRow('KickRating',2)"class="rowButton">GOOD</button><br>
+    <span>HAT</span><button ng-click="setRow('HatRating',0)"class="rowButton">BAD</button><button ng-click="setRow('HatRating',1)"class="rowButton">OK</button><button ng-click="setRow('HatRating',2)"class="rowButton">GOOD</button><br>
+    <span>SNARE</span><button ng-click="setRow('SnareRating',0)"class="rowButton">BAD</button><button ng-click="setRow('SnareRating',1)"class="rowButton">OK</button><button ng-click="setRow('SnareRating',2)"class="rowButton">GOOD</button><br>
+
+
+
+
+    <div style="width: 100%; display:block; clear: both;"></div>
+    <h4>ANALYTICS STUFF new</h4>
+    <div ng-repeat='analytic in analytics track by $index'
+         style="border:solid black 1px; width:31px; float:left; font-size:10px">
+        i:<b>{{$index + 1}}</b><br/>
+        bl:<br/>
+        <b>{{analytic.beatLoopId}}</b><br/>
+        b:<br/>
+        <b>{{analytic.blBars}}</b><br/>
+        blA:<br/>
+        <b>{{analytic.beatLoopAltId}}</b><br/>
+        b:<br/>
+        <b>{{analytic.blAltBars}}</b><br/>
+        hl:<br/>
+        <b>{{analytic.harmonicLoopId}}</b><br/>
+        b:<br/>
+        <b>{{analytic.hlBars}}</b><br/>
+        hlA:<br/>
+        <b>{{analytic.harmonicLoopAltId}}</b><br/>
+        b:<br/>
+        <b>{{analytic.hlAltBars}}</b><br/>
+        hs:<br/>
+        <b>{{analytic.hiSynthId}}</b><br/>
+        ms:<br/>
+        <b>{{analytic.midSynthId}}</b><br/>
+        ls:<br/>
+        <b>{{analytic.lowSynthId}}</b><br/>
+        al:<br/>
+        <b>{{analytic.ambientLoopId}}</b>
+    </div>
+</div>
