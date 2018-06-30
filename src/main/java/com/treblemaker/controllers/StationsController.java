@@ -39,6 +39,13 @@ public class StationsController {
         }
 
         List<StationTrack> filteredTracks = tracks.stream().filter(t -> t.getUploaded() == 1).collect(Collectors.toList());
+        if(filteredTracks == null || filteredTracks.isEmpty()){
+            StationTrack emptyStationTrack = new StationTrack();
+            emptyStationTrack.setStationId(0);
+            emptyStationTrack.setName("error");
+            return new StationTrackDto(emptyStationTrack);
+        }
+
         StationTrack selection = filteredTracks.get((new Random()).nextInt(filteredTracks.size()));
         return new StationTrackDto(selection);
     }
