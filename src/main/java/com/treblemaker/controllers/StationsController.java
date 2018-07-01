@@ -30,6 +30,8 @@ public class StationsController {
     @RequestMapping(value = "/api/track", method = RequestMethod.GET)
     public @ResponseBody
     StationTrackDto getTrack(){
+        System.out.println("*** /API/TRACK/ WAS CALLED ***");
+
         List<StationTrack> tracks = stationTrackDal.findAll();
         if(tracks == null || tracks.isEmpty()){
             StationTrack emptyStationTrack = new StationTrack();
