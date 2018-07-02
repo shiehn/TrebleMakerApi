@@ -40,7 +40,7 @@ public class StationsController {
             return new StationTrackDto(emptyStationTrack);
         }
 
-        List<StationTrack> filteredTracks = tracks.stream().filter(t -> t.getUploaded() == 1).collect(Collectors.toList());
+        List<StationTrack> filteredTracks = tracks.stream().filter(t -> t.getUploaded() == 1 && t.getStationId() == 2).collect(Collectors.toList());
         if(filteredTracks == null || filteredTracks.isEmpty()){
             StationTrack emptyStationTrack = new StationTrack();
             emptyStationTrack.setStationId(0);
