@@ -1,5 +1,7 @@
 package com.treblemaker.controllers;
 
+import com.treblemaker.configs.AppConfigs;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +13,9 @@ import java.nio.file.Paths;
 @Controller
 public class FileSyncController {
 
+    @Autowired
+    private AppConfigs appConfigs;
+
     @RequestMapping(value = "filesync", method = RequestMethod.POST)
     public ResponseEntity upload(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
@@ -19,7 +24,7 @@ public class FileSyncController {
 
         try {
             byte[] bytes = file.getBytes();
-            Path targetdir = Paths.get("/TrebleMakerApi", "src", "main", "resources", "static", "tmpaudio");
+            Path targetdir = Paths.get(appConfigs.APPLICATION_ROOT, "src", "main", "resources", "static", "tmpaudio");
             if(!targetdir.toFile().exists()){
                 targetdir.toFile().mkdirs();
             }
