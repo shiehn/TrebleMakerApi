@@ -7,6 +7,7 @@ import com.treblemaker.model.stations.StationDto;
 import com.treblemaker.model.stations.StationTrack;
 import com.treblemaker.model.stations.StationTrackDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,9 @@ public class StationsController {
     @Autowired
     private IStationTrackDal stationTrackDal;
 
+    @Value("${api.version}")
+    int apiVersion;
+
     @RequestMapping(value = "/api/track", method = RequestMethod.GET)
     public @ResponseBody
     StationTrackDto getTrack(){
@@ -40,7 +44,7 @@ public class StationsController {
             return new StationTrackDto(emptyStationTrack);
         }
 
-        List<StationTrack> filteredTracks = tracks.stream().filter(t -> t.getUploaded() == 1 && t.getStationId() == 2).collect(Collectors.toList());
+        List<StationTrack> filteredTracks = tracks.stream().filter(t -> t.getUploaded() == 1 && t.getStationId() == 2 && t.getApiVersion() == apiVersion).collect(Collectors.toList());
         if(filteredTracks == null || filteredTracks.isEmpty()){
             StationTrack emptyStationTrack = new StationTrack();
             emptyStationTrack.setStationId(0);
