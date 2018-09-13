@@ -188,11 +188,6 @@ public class AnalyticsController {
 
     @RequestMapping(value = "/api/analytics", method = RequestMethod.POST, consumes = "application/json")
     public ResponseEntity progressionPost(@RequestBody List<TimeSlot> timeSlotList) {
-
-        int test = (new Random()).nextInt(888);
-        test += 34;
-        System.out.print(test);
-
         List<List<CompositionTimeSlot>> horizontalRatings = new ArrayList<>();
 
         boolean addHorizontalRatings = false;
@@ -201,7 +196,19 @@ public class AnalyticsController {
 
         for (int i = 0; i < timeSlotList.size(); i++) {
 
-            CompositionTimeSlot compositionTimeSlot = compositionTimeSlotDal.findOne(timeSlotList.get(i).getId());
+            CompositionTimeSlot compositionTimeSlot = compositionTimeSlotDal.findById(timeSlotList.get(i).getId()).get();
+
+            if(i == 0){
+                Composition composition = compositionDal.findById(compositionTimeSlot.getCompositionId()).get();
+
+                List<StationTrack> stationTracks = stationTrackDal.findAll();
+                for(StationTrack stationTrack:stationTracks){
+                    if(stationTrack.getFile().equalsIgnoreCase(composition.getCompositionUid())){
+                        stationTrack.setSelectedMelody(timeSlotList.get(0).getSelectedMelody());
+                        stationTrackDal.save(stationTrack);
+                    }
+                }
+            }
 
             AnalyticsVertical analyticsVertical = new AnalyticsVertical();
             analyticsVertical.setTimeSlotId(compositionTimeSlot.getId());
@@ -247,9 +254,9 @@ public class AnalyticsController {
             }
 
             //TODO SHOULD THIS BE A BATCH SAVE???
-            analyticsVerticalDal.save(analyticsVertical);
-            compositionTimeSlot.setRated(1);
-            compositionTimeSlotDal.save(compositionTimeSlot);
+                analyticsVerticalDal.save(analyticsVertical);
+                compositionTimeSlot.setRated(1);
+                compositionTimeSlotDal.save(compositionTimeSlot);
         }
 
         //SAVE HORIZONTAL ANALYTICS

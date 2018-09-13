@@ -6,14 +6,12 @@
     $scope.buttonLabel = "Generate Audio";
     $scope.audioTrackPath = "";
     $scope.showPlayBtn = false;
-
     $scope.trainButtonLabel = "Train Hive Compose";
     $scope.audioTrackPath = "";
     $scope.showPlayBtn = false;
-
     $scope.feedBackModel = [];
-
     $scope.analytics = "analytics stuff 2"
+    $scope.selectedMelody = 0;
 
     var setAnalyticsFeedback = function(compositionId){
     
@@ -61,18 +59,27 @@
     //TESTING
     //setAnalyticsFeedback('90eadf17-35ab-47b8-80b6-6287995d3ed3');
 
-    function getCompletedTrack(data){
+    function getCompletedTrack(data, melodyVersion){
 
-        console.log("getCompletedTrack", data.value + "_0_1.mp3");
-        $scope.audioTrackPath = CONST.HIVE_COMPOSE_SERVER + "/tmpaudio/" + data.value + "_0_1.mp3";
+        var fullTrackId = "";
+        if(melodyVersion == 1){
+            fullTrackId = CONST.HIVE_COMPOSE_SERVER + "/tmpaudio/" + data.compositionUid + "_0_1.mp3"
+        }else if(melodyVersion == 2){
+            fullTrackId = CONST.HIVE_COMPOSE_SERVER + "/tmpaudio/" + data.compositionUid + "_0_1_alt_melody.mp3"
+        }else{
+            console.log("ERROR UNKNOW MELODY VERSION", melodyVersion)
+        }
+
+        console.log("getCompletedTrack", fullTrackId);
+        $scope.audioTrackPath = fullTrackId;
         $scope.showPlayBtn = true;
 
-        setAnalyticsFeedback(data.value);
+        setAnalyticsFeedback(data.compositionUid);
 
         console.log('about to broadcast : loadsimpleplayer');
-        console.log('about to broadcast with : ' + CONST.HIVE_COMPOSE_SERVER + "/tmpaudio/" + data.value + "_0_1.mp3");
+        console.log('about to broadcast with : ' + fullTrackId);
 
-        $scope.$broadcast('loadsimpleplayer', CONST.HIVE_COMPOSE_SERVER + "/tmpaudio/" + data.value + "_0_1.mp3");
+        $scope.$broadcast('loadsimpleplayer', fullTrackId);
 
         inProgress = false;
     }
@@ -132,14 +139,22 @@
         });
     }
 
-    var trainHiveCompose = function () {
+    var trainHiveCompose = function (melodyVersion) {
 
-            $http.post(CONST.DOMAIN + '/api/CompositionStatus/findUnRated').success(function (data) {
+            $http.get(CONST.DOMAIN + '/api/CompositionStatus/findUnRated').success(function (data) {
+                console.log('DEBUG START')
+                console.log(data)
+                console.log('DEBUG STOP')
                 if (data && (data.StatusCode != 500)) {
-                    console.log('/api/CompositionStatus/findUnRated/ data=', data.value + "_0_1.mp3");
-                    trackId = data;
-                    getTimeslotAnalytics(data.value);
-                    getCompletedTrack(data);
+
+                    if(melodyVersion === 1){
+                        console.log('/api/CompositionStatus/findUnRated/ data=', data.compositionUid + "_0_1.mp3");
+                    }else if(melodyVersion === 2){
+                        console.log('/api/CompositionStatus/findUnRated/ data=', data.compositionUid + "_0_1_alt_melody.mp3");
+                    }
+                    trackId = data.compositionUid;
+                    getTimeslotAnalytics(trackId);
+                    getCompletedTrack(data, melodyVersion);
                 } else {
                     console.log("ERROR DATA", data.value);
                     alert("Sorry, Encountered an error generating a harmonic progression");
@@ -286,15 +301,18 @@
         }
     }
 
-     $scope.trainButtonClick = function () {
+     $scope.trainButtonClick = function (melodyVersion) {
+
+            $scope.selectedMelody = melodyVersion;
 
             console.log("trainButtonClick");
+            console.log("TRAIN WITH MELODY", $scope.selectedMelody)
 
              if (!inProgress) {
                  inProgress = true;
                  $scope.buttonLabel = "hold on .."
                  $scope.trainButtonLabel = "fetching audio .."
-                 trainHiveCompose();
+                 trainHiveCompose(melodyVersion);
              }
          }
 
@@ -513,6 +531,7 @@
             $scope.feedBackModel[i].horizontalStart = false;
             $scope.feedBackModel[i].horizontalStop = false;
             $scope.feedBackModel[i].inGroup = false;
+            $scope.feedBackModel[i].selectedMelody = 0;
         }
     }
 
@@ -560,7 +579,6 @@
         for (var i = 0; i < $scope.feedBackModel.length; i++) {
 
             var timeSlot = {
-
                 "HorizontalCategoryHarmonic":Boolean($scope.feedBackModel[i].HorizontalCategoryHarmonic),
                 "HorizontalCategoryAmbience":Boolean($scope.feedBackModel[i].HorizontalCategoryAmbience),
                 "HorizontalCategoryRhythmic":Boolean($scope.feedBackModel[i].HorizontalCategoryRhythmic),
@@ -581,7 +599,8 @@
                 "HorizontalStop":Boolean($scope.feedBackModel[i].HorizontalStop),
                 "HorizontalRating":$scope.feedBackModel[i].HorizontalRating,
                 "HorizontalId":$scope.feedBackModel[i].HorizontalId,
-                "InGroup":$scope.feedBackModel[i].InGroup
+                "InGroup":$scope.feedBackModel[i].InGroup,
+                "selectedMelody": $scope.selectedMelody
             };
 
             timeSlots.push(timeSlot);

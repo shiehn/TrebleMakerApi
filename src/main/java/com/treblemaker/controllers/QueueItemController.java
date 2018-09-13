@@ -35,7 +35,7 @@ public class QueueItemController {
 
         System.out.println("/api/Progression GET");
 
-        QueueItem queueItem = queueItemsDal.findOne((long)testid);
+        QueueItem queueItem = queueItemsDal.findById((long)testid).get();
 
         if(queueItem != null && queueItem.getJobStatus() == 2){
 

@@ -2,6 +2,8 @@ package com.treblemaker.controllers.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Transient;
+
 public class TimeSlot
 {
     public TimeSlot(){}
@@ -68,6 +70,17 @@ public class TimeSlot
 
     @JsonProperty("InGroup")
     public Boolean InGroup;
+
+    @Transient
+    public int selectedMelody;
+
+    public int getSelectedMelody() {
+        return selectedMelody;
+    }
+
+    public void setSelectedMelody(int selectedMelody) {
+        this.selectedMelody = selectedMelody;
+    }
 
     @JsonProperty("InGroup")
     public Boolean isInGroup() {

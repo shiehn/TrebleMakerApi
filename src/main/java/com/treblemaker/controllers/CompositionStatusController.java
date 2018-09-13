@@ -4,6 +4,7 @@ import com.treblemaker.dal.interfaces.ICompositionDal;
 import com.treblemaker.dal.interfaces.ICompositionTimeSlotDal;
 import com.treblemaker.model.JsonString;
 import com.treblemaker.model.composition.Composition;
+import com.treblemaker.model.composition.CompositionDto;
 import com.treblemaker.model.composition.CompositionTimeSlot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,16 +23,16 @@ public class CompositionStatusController {
     @Autowired
     ICompositionDal compositionDal;
 
-    @RequestMapping(value = "/api/CompositionStatus/findUnRated", method = RequestMethod.POST)
-    public @ResponseBody JsonString findUnRatedComposition(){
-
+    @RequestMapping(value = "/api/CompositionStatus/findUnRated", method = RequestMethod.GET)
+    public @ResponseBody
+    CompositionDto findComposition(){
         List<CompositionTimeSlot> timeSlots = compositionTimeSlotDal.findByRated(0);
 
         if(timeSlots.size() > 0){
-            Composition composition = compositionDal.findOne(timeSlots.get(0).getCompositionId());
-            return new JsonString(composition.getCompositionUid());
+            Composition composition = compositionDal.findById(timeSlots.get(0).getCompositionId()).get();
+            return new CompositionDto(composition);
         }else{
-            return new JsonString("error");
+            return new CompositionDto();
         }
     }
 }

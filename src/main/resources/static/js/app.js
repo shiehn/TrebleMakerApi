@@ -9,7 +9,6 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'ngRoute'])
 //        "HIVE_COMPOSE_SERVER": "http://34.214.119.140:8080"
     })
     .config(['$routeProvider', function($routeProvider) {
-
         $routeProvider.when('/view1', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
         $routeProvider.when('/view2', {templateUrl: 'partials/upload_beat_loops.html', controller: 'BeatLoopsCtrl'});
         $routeProvider.when('/view3', {templateUrl: 'partials/upload_harmonic_loops.html', controller: 'HarmonicLoopsCtrl'});

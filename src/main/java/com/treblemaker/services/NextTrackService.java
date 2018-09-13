@@ -45,7 +45,7 @@ public class NextTrackService {
 
     public List<String> getNextTracks(int stationId, int currentTrackId) {
 
-        Station station = stationDal.findOne(stationId);
+        Station station = stationDal.findById(stationId).get();
 
         List<StationTrack> stationTracks = new ArrayList<>();
         stationTracks.addAll(station.getStationTracks());
@@ -83,7 +83,7 @@ public class NextTrackService {
     }
 
     public SentimentComposition getSentimentComposition(int stationId){
-        Station station = stationDal.findOne(stationId);
+        Station station = stationDal.findById(stationId).get();
         List<StationTrack> uploadedTracks = station.getStationTracks().stream().filter(stationTrack -> stationTrack.getUploaded() == 1
                 && stationTrack.getAddToStation() == 1
                 && stationTrack.getNumOfVersions() > 1

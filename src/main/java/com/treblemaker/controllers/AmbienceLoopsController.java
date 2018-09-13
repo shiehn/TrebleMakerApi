@@ -123,7 +123,7 @@ public class AmbienceLoopsController {
     private List<HiveChord> getChords(List<Integer> chordIds) {
 
         List<HiveChord> chords = new ArrayList<>();
-        chordIds.forEach(chordId -> chords.add(hiveChordDal.findOne(chordId)));
+        chordIds.forEach(chordId -> chords.add(hiveChordDal.findById(chordId).get()));
 
         return chords;
     }
