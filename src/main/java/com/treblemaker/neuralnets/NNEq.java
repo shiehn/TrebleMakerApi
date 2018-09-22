@@ -91,8 +91,6 @@ public class NNEq {
             //Load the training data:
             RecordReader rr = new CSVRecordReader();
 
-
-
             rr.initialize(new FileSplit(Paths.get("freqdata", freq.toString() + ".csv").toFile()));
             DataSetIterator trainIter = new RecordReaderDataSetIterator(rr, batchSize, 0, 3);
 

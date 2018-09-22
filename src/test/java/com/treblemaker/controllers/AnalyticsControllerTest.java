@@ -1,10 +1,9 @@
-package com.treblemaker.tests;
+package com.treblemaker.controllers;
 
 import com.treblemaker.SpringConfiguration;
-import com.treblemaker.controllers.AnalyticsController;
 import com.treblemaker.controllers.interfaces.IFillRatingDal;
 import com.treblemaker.controllers.interfaces.IHitRatingDal;
-import com.treblemaker.dal.interfaces.ICompositionDal;
+import com.treblemaker.dal.interfaces.*;
 import com.treblemaker.model.composition.Composition;
 import com.treblemaker.model.composition.CompositionTimeSlot;
 import com.treblemaker.model.hitsandfills.FillRating;
@@ -14,8 +13,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,9 +25,12 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = SpringConfiguration.class, properties = {"spring.datasource.url=jdbc:mysql://localhost:3306/hivecomposedb", "spring.datasource.username=", "spring.datasource.password="})
-public class AnalyticsControllerTests {
+@RunWith(SpringRunner.class)
+@ComponentScan({"com.treblemaker"})
+@SpringBootTest(classes = SpringConfiguration.class)
+@TestPropertySource(
+        locations = "classpath:application-test.properties")
+public class AnalyticsControllerTest {
 
     @Autowired
     private AnalyticsController analyticsController;
@@ -105,3 +108,4 @@ public class AnalyticsControllerTests {
         fillRatingDal.delete(targets.get(0));
     }
 }
+

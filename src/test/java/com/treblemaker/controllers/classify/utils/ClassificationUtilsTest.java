@@ -1,6 +1,5 @@
-package com.treblemaker.tests;
+package com.treblemaker.controllers.classify.utils;
 
-import com.treblemaker.controllers.classify.utils.ClassificationUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.nd4j.linalg.api.ndarray.INDArray;

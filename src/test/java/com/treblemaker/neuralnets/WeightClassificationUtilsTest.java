@@ -1,10 +1,11 @@
-package com.treblemaker.tests;
+package com.treblemaker.neuralnets;
 
 import com.treblemaker.model.eq.EqWeightResponse;
 import com.treblemaker.model.eq.Ratings;
-import com.treblemaker.neuralnets.WeightClassificationUtils;
 import com.treblemaker.weighters.enums.WeightClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,8 @@ import java.util.List;
 import static com.treblemaker.model.IParametricEq.EqBand;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WeightClassificationUtilTests {
+@RunWith(SpringRunner.class)
+public class WeightClassificationUtilsTest {
 
     @Test
     public void shouldFindInHiRegister() {

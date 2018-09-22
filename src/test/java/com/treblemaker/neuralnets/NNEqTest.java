@@ -1,13 +1,15 @@
-package com.treblemaker.tests;
+package com.treblemaker.neuralnets;
 
 import com.treblemaker.SpringConfiguration;
 import com.treblemaker.model.IParametricEq;
-import com.treblemaker.neuralnets.NNEq;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,13 +17,17 @@ import java.net.URISyntaxException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
+@ComponentScan({"com.treblemaker"})
 @SpringBootTest(classes = SpringConfiguration.class)
-public class NNEqTests {
+@TestPropertySource(
+        locations = "classpath:application-test.properties")
+public class NNEqTest {
 
     @Autowired
     NNEq nnEq;
 
+    @Ignore
     @Test
     public void shouldCreateFreq20Csv() throws InterruptedException, IOException, URISyntaxException {
 

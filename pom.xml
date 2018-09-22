@@ -278,11 +278,11 @@
             <artifactId>aws-java-sdk</artifactId>
             <version>1.10.40</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-security</artifactId>-->
-            <!--<version>2.0.4.RELEASE</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <version>2.0.4.RELEASE</version>
+        </dependency>
 
         <!-- Core DL4J functionality -->
         <!-- Core DL4J functionality -->
@@ -329,7 +329,8 @@
                     </execution>
                 </executions>
                 <configuration>
-
+                    <!--<wait>1200000</wait>-->
+                    <!--<maxAttempts>180</maxAttempts>-->
                     <mainClass>com.treblemaker.Application</mainClass>
                     <addResources>true</addResources>
                         <!-- FOR PROD: WHEN JVM ARGS ARE PASSED THE PROCESS FORKS AND DEBUGGER IS NOT ATTACHED -->

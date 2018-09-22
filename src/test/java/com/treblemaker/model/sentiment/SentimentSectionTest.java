@@ -1,14 +1,13 @@
-package com.treblemaker.tests.model.sentiment;
+package com.treblemaker.model.sentiment;
 
 import com.treblemaker.SpringConfiguration;
-import com.treblemaker.model.sentiment.SentimentSection;
-import com.treblemaker.model.sentiment.SentimentSectionDto;
-import com.treblemaker.model.sentiment.TrackToLabels;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,15 +16,16 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
+@ComponentScan({"com.treblemaker"})
 @SpringBootTest(classes = SpringConfiguration.class)
-public class SentimentSectionsDtoTest {
-
+@TestPropertySource(
+        locations = "classpath:application-test.properties")
+public class SentimentSectionTest {
     SentimentSection sentimentSection = new SentimentSection();
 
     @Before
-    public void setup(){
-
+    public void setup() {
         Map<String, List<String>> trackToLabelsOne = new HashMap<>();
         trackToLabelsOne.put("A", Arrays.asList("l1", "l4"));
         trackToLabelsOne.put("B", Arrays.asList("l2", "l3"));
@@ -37,36 +37,37 @@ public class SentimentSectionsDtoTest {
     }
 
     @Test
-    public void populateSentimentLabels(){
+    public void populateSentimentLabels() {
 
         SentimentSectionDto sentimentSectionsDto = new SentimentSectionDto(sentimentSection);
 
         List<TrackToLabels> trackToLabelsList = sentimentSectionsDto.getTrackToLabelsList();
 
-        for(TrackToLabels trackToLabels : trackToLabelsList){
-            if(trackToLabels.getName().equalsIgnoreCase("l1")){
+        for (TrackToLabels trackToLabels : trackToLabelsList) {
+            if (trackToLabels.getName().equalsIgnoreCase("l1")) {
                 assertThat(trackToLabels.getLabels()).hasSize(3);
             }
         }
 
-        for(TrackToLabels trackToLabels : trackToLabelsList){
-            if(trackToLabels.getName().equalsIgnoreCase("l2")){
+        for (TrackToLabels trackToLabels : trackToLabelsList) {
+            if (trackToLabels.getName().equalsIgnoreCase("l2")) {
                 assertThat(trackToLabels.getLabels()).hasSize(2);
             }
         }
 
-        for(TrackToLabels trackToLabels : trackToLabelsList){
-            if(trackToLabels.getName().equalsIgnoreCase("l3")){
+        for (TrackToLabels trackToLabels : trackToLabelsList) {
+            if (trackToLabels.getName().equalsIgnoreCase("l3")) {
                 assertThat(trackToLabels.getLabels()).hasSize(1);
                 assertThat(trackToLabels.getLabels().get(0)).isEqualToIgnoringCase("B");
             }
         }
 
-        for(TrackToLabels trackToLabels : trackToLabelsList){
-            if(trackToLabels.getName().equalsIgnoreCase("l4")){
+        for (TrackToLabels trackToLabels : trackToLabelsList) {
+            if (trackToLabels.getName().equalsIgnoreCase("l4")) {
                 assertThat(trackToLabels.getLabels()).hasSize(3);
             }
         }
     }
-
 }
+
+

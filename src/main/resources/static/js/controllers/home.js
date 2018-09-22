@@ -26,8 +26,8 @@
     $scope.showFillRatingBtns = true;
 
     $scope.setHitRatingAnalytics = function(hitrating){
-        console.log('HIT_RATING_ENPOINT= ' + CONST.DOMAIN + '/api/analytics/hitrating/' + trackId.value.replace('.wav', '') + '/' + hitrating + '/');
-        $http.get(CONST.DOMAIN + '/api/analytics/hitrating/' + trackId.value.replace('.wav', '') + '/' + hitrating + '/').success(function (data, status, headers, config) {
+        console.log('HIT_RATING_ENPOINT= ' + CONST.DOMAIN + '/api/analytics/hitrating/' + trackId + '/' + hitrating + '/');
+        $http.get(CONST.DOMAIN + '/api/analytics/hitrating/' + trackId + '/' + hitrating + '/').success(function (data, status, headers, config) {
             console.log('hitRatingResponse : ' + data);
             $scope.showHitRatingBtns = false;
         }).error(function (data) {
@@ -37,7 +37,7 @@
 
     $scope.setFillRatingAnalytics = function(fillrating){
         console.log('FILL_RATING_ENDPOINT = ' + CONST.DOMAIN + '/api/analytics/fillrating/' + trackId.value.replace('.wav', '') + '/' + fillrating + '/');
-        $http.get(CONST.DOMAIN + '/api/analytics/fillrating/' + trackId.value.replace('.wav', '') + '/' + fillrating + '/').success(function (data, status, headers, config) {
+        $http.get(CONST.DOMAIN + '/api/analytics/fillrating/' + trackId + '/' + fillrating + '/').success(function (data, status, headers, config) {
             console.log('fillRatingResponse : ' + data);
             $scope.showFillRatingBtns = false;
         }).error(function (data) {
@@ -46,11 +46,8 @@
     }
 
     var getTimeslotAnalytics = function(compositionId){
-
                 $http.get(CONST.DOMAIN + '/api/Analytics/timeslots/' + compositionId).then(function successCallback(data) {
-
                     $scope.analytics = data.data;
-
                 }, function errorCallback(data) {
                     console.log('ERROR data',data.data.value);
                 });
@@ -97,23 +94,15 @@
                 //WAIT A FEW SECONDS BEFORE LOADING SONG ..
                 var millisecondsToWait = 8000;
                 setTimeout(function () {
-                    //WAIT COMPLETE
-                    console.log("error", "NOTequal" + data.data.value);
                     $scope.audioTrackPath = CONST.HIVE_COMPOSE_SERVER + "/audio/" + data.data.value;
                     $scope.showPlayBtn = true;
-
                     setAnalyticsFeedback(data.data.value.replace("_0_1.mp3", ""));
-
-                    console.log('about to broadcast : loadsimpleplayer');
-                    console.log('about to broadcast with : ' + CONST.HIVE_COMPOSE_SERVER + "/audio/" + data.data.value);
-
                     $scope.$broadcast('loadsimpleplayer', CONST.HIVE_COMPOSE_SERVER + "/audio/" + data.data.value);
 
                     inProgress = false;
                 }, millisecondsToWait);
 
             } else {
-                console.log("error", "ISequal");
                 $scope.audioTrackPath = Date.now();
                 setTimeout(checkForTrackCompletion, 1000);
             }
@@ -140,13 +129,8 @@
     }
 
     var trainHiveCompose = function (melodyVersion) {
-
             $http.get(CONST.DOMAIN + '/api/CompositionStatus/findUnRated').success(function (data) {
-                console.log('DEBUG START')
-                console.log(data)
-                console.log('DEBUG STOP')
                 if (data && (data.StatusCode != 500)) {
-
                     if(melodyVersion === 1){
                         console.log('/api/CompositionStatus/findUnRated/ data=', data.compositionUid + "_0_1.mp3");
                     }else if(melodyVersion === 2){
@@ -505,8 +489,7 @@
 */
 
     $scope.addToStation = function(){
-
-        $http.get(CONST.DOMAIN + '/api/analytics/addtostation/' + trackId.value.replace('.mp3', '')).success(function (data, status, headers, config) {
+        $http.get(CONST.DOMAIN + '/api/analytics/addtostation/' + trackId).success(function (data, status, headers, config) {
             console.log(data);
         });
     }

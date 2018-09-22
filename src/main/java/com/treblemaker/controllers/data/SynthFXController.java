@@ -12,6 +12,7 @@ import com.treblemaker.model.fx.SynthFXCoefficients;
 import com.treblemaker.model.fx.util.DurationAnalysis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
 public class SynthFXController {
 

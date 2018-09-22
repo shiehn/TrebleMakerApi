@@ -1,7 +1,6 @@
-package com.treblemaker.tests;
+package com.treblemaker.controllers.data;
 
 import com.treblemaker.SpringConfiguration;
-import com.treblemaker.controllers.data.BeatAltController;
 import com.treblemaker.dal.interfaces.IAnalyticsVerticalCustomDal;
 import com.treblemaker.dal.interfaces.IBeatLoopsDal;
 import com.treblemaker.dal.interfaces.IHarmonicLoopsDal;
@@ -14,7 +13,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.StringWriter;
 import java.sql.ResultSet;
@@ -26,8 +27,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+
+@RunWith(SpringRunner.class)
+@ComponentScan({"com.treblemaker"})
 @SpringBootTest(classes = SpringConfiguration.class)
+@TestPropertySource(
+        locations = "classpath:application-test.properties")
 public class BeatAltControllerTest {
 
     private BeatAltController beatAltController;

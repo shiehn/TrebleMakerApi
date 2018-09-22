@@ -1,4 +1,4 @@
-package com.treblemaker.tests;
+package com.treblemaker.controllers.data;
 
 import com.treblemaker.SpringConfiguration;
 import com.treblemaker.controllers.data.NgramsController;
@@ -15,15 +15,21 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
+@ComponentScan({"com.treblemaker"})
 @SpringBootTest(classes = SpringConfiguration.class)
-public class NgramTests {
+@TestPropertySource(
+        locations = "classpath:application-test.properties")
+public class NgramsControllerTest {
 
 //    @Autowired
 //    public IChordSequencesDal chordSequencesDal;

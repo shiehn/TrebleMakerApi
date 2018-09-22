@@ -1,4 +1,4 @@
-package com.treblemaker.tests;
+package com.treblemaker.controllers.data;
 
 import com.treblemaker.SpringConfiguration;
 import com.treblemaker.controllers.data.HarmonicAltController;
@@ -27,7 +27,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = SpringConfiguration.class)
 public class HarmonicAltControllerTest {
 
     private HarmonicAltController harmonicAltController;
@@ -157,3 +156,4 @@ public class HarmonicAltControllerTest {
         assertThat(actualResult).isEqualTo(expectedResult);
     }
 }
+

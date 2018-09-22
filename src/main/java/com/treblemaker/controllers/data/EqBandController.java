@@ -5,10 +5,12 @@ import com.treblemaker.model.parametriceq.eqprediction.ParametricDto;
 import com.treblemaker.services.EqFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
 public class EqBandController {
 

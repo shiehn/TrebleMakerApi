@@ -10,13 +10,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
 public class FileSyncController {
 
     @Autowired
     private AppConfigs appConfigs;
 
-    @RequestMapping(value = "filesync", method = RequestMethod.POST)
+    @RequestMapping(value = "/filesync", method = RequestMethod.POST)
     public ResponseEntity upload(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);

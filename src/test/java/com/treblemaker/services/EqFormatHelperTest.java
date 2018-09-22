@@ -1,27 +1,23 @@
-package com.treblemaker.tests;
+package com.treblemaker.services;
 
 import com.treblemaker.SpringConfiguration;
+import com.treblemaker.model.parametriceq.ParametricEqWithType;
 import com.treblemaker.model.parametriceq.eqprediction.ParametricDtoBand;
-import com.treblemaker.services.EqFormatHelper;
-import com.treblemaker.services.EqPredictorColumns;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static com.treblemaker.model.parametriceq.ParametricEqWithType.EqPhase;
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = SpringConfiguration.class)
-public class EqFormatHelperTests {
+public class EqFormatHelperTest {
 
     @Test
     public void should_havePhaseOnePredictors(){
 
         //predict beat loop
 
-        EqPhase phase = EqPhase.PHASE_ONE;
+        ParametricEqWithType.EqPhase phase = ParametricEqWithType.EqPhase.PHASE_ONE;
         ParametricDtoBand band = new ParametricDtoBand();
 
         band = EqFormatHelper.addPredictorColumns(band, phase);
@@ -37,7 +33,7 @@ public class EqFormatHelperTests {
 
         //predict synth hi
 
-        EqPhase phase = EqPhase.PHASE_TWO;
+        ParametricEqWithType.EqPhase phase = ParametricEqWithType.EqPhase.PHASE_TWO;
         ParametricDtoBand band = new ParametricDtoBand();
 
         band = EqFormatHelper.addPredictorColumns(band, phase);
@@ -54,7 +50,7 @@ public class EqFormatHelperTests {
 
         //predict synth low alt
 
-        EqPhase phase = EqPhase.PHASE_THREE;
+        ParametricEqWithType.EqPhase phase = ParametricEqWithType.EqPhase.PHASE_THREE;
         ParametricDtoBand band = new ParametricDtoBand();
 
         band = EqFormatHelper.addPredictorColumns(band, phase);
@@ -72,7 +68,7 @@ public class EqFormatHelperTests {
 
         //predict synth mid
 
-        EqPhase phase = EqPhase.PHASE_FOUR;
+        ParametricEqWithType.EqPhase phase = ParametricEqWithType.EqPhase.PHASE_FOUR;
         ParametricDtoBand band = new ParametricDtoBand();
 
         band = EqFormatHelper.addPredictorColumns(band, phase);
@@ -91,7 +87,7 @@ public class EqFormatHelperTests {
 
         //predict synth mid alt
 
-        EqPhase phase = EqPhase.PHASE_FIVE;
+        ParametricEqWithType.EqPhase phase = ParametricEqWithType.EqPhase.PHASE_FIVE;
         ParametricDtoBand band = new ParametricDtoBand();
 
         band = EqFormatHelper.addPredictorColumns(band, phase);
@@ -110,7 +106,7 @@ public class EqFormatHelperTests {
 
         //predict synth low
 
-        EqPhase phase = EqPhase.PHASE_SIX;
+        ParametricEqWithType.EqPhase phase = ParametricEqWithType.EqPhase.PHASE_SIX;
         ParametricDtoBand band = new ParametricDtoBand();
 
         band = EqFormatHelper.addPredictorColumns(band, phase);
@@ -129,7 +125,7 @@ public class EqFormatHelperTests {
 
         //predict synth hight alt
 
-        EqPhase phase = EqPhase.PHASE_SEVEN;
+        ParametricEqWithType.EqPhase phase = ParametricEqWithType.EqPhase.PHASE_SEVEN;
         ParametricDtoBand band = new ParametricDtoBand();
 
         band = EqFormatHelper.addPredictorColumns(band, phase);
@@ -148,7 +144,7 @@ public class EqFormatHelperTests {
 
         //predict harmonic loop alt
 
-        EqPhase phase = EqPhase.PHASE_EIGHT;
+        ParametricEqWithType.EqPhase phase = ParametricEqWithType.EqPhase.PHASE_EIGHT;
         ParametricDtoBand band = new ParametricDtoBand();
 
         band = EqFormatHelper.addPredictorColumns(band, phase);
@@ -168,7 +164,7 @@ public class EqFormatHelperTests {
 
         //predict beat loop alt
 
-        EqPhase phase = EqPhase.PHASE_NINE;
+        ParametricEqWithType.EqPhase phase = ParametricEqWithType.EqPhase.PHASE_NINE;
         ParametricDtoBand band = new ParametricDtoBand();
 
         band = EqFormatHelper.addPredictorColumns(band, phase);
@@ -189,7 +185,7 @@ public class EqFormatHelperTests {
 
         //predict ambience loop
 
-        EqPhase phase = EqPhase.PHASE_TEN;
+        ParametricEqWithType.EqPhase phase = ParametricEqWithType.EqPhase.PHASE_TEN;
         ParametricDtoBand band = new ParametricDtoBand();
 
         band = EqFormatHelper.addPredictorColumns(band, phase);
@@ -211,7 +207,7 @@ public class EqFormatHelperTests {
 
         //predict fills
 
-        EqPhase phase = EqPhase.PHASE_ELEVEN;
+        ParametricEqWithType.EqPhase phase = ParametricEqWithType.EqPhase.PHASE_ELEVEN;
         ParametricDtoBand band = new ParametricDtoBand();
 
         band = EqFormatHelper.addPredictorColumns(band, phase);

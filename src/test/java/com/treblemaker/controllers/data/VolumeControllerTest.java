@@ -1,4 +1,4 @@
-package com.treblemaker.tests;
+package com.treblemaker.controllers.data;
 
 import com.treblemaker.controllers.data.VolumeController;
 import com.treblemaker.model.analytics.AnalyticsVertical;
