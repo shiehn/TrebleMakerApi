@@ -22,14 +22,16 @@ import java.util.stream.Collectors;
 @Controller
 public class StationsController {
 
-    @Autowired
     private IStationDal stationDal;
+    private IStationTrackDal stationTrackDal;
+    int apiVersion;
 
     @Autowired
-    private IStationTrackDal stationTrackDal;
-
-    @Value("${api.version}")
-    int apiVersion;
+    public StationsController(IStationDal stationDal, IStationTrackDal stationTrackDal, @Value("${api.version}") int apiVersion) {
+        this.stationDal = stationDal;
+        this.stationTrackDal = stationTrackDal;
+        this.apiVersion = apiVersion;
+    }
 
     @RequestMapping(value = "/api/track", method = RequestMethod.GET)
     public @ResponseBody
