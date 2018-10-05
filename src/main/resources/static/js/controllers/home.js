@@ -136,7 +136,9 @@
                     }else if(melodyVersion === 2){
                         console.log('/api/CompositionStatus/findUnRated/ data=', data.compositionUid + "_0_1_alt_melody.mp3");
                     }
+
                     trackId = data.compositionUid;
+
                     getTimeslotAnalytics(trackId);
                     getCompletedTrack(data, melodyVersion);
                 } else {
