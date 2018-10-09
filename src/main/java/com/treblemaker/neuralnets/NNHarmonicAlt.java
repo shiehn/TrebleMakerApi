@@ -2,6 +2,7 @@ package com.treblemaker.neuralnets;
 
 import com.treblemaker.configs.AppConfigs;
 import com.treblemaker.controllers.classify.utils.ClassificationUtils;
+import com.treblemaker.utils.HttpHelper;
 import org.apache.commons.compress.utils.IOUtils;
 import org.datavec.api.records.reader.RecordReader;
 import org.datavec.api.records.reader.impl.csv.CSVRecordReader;
@@ -33,13 +34,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-@Component
 public class NNHarmonicAlt {
 
-    @Autowired
     private AppConfigs appConfigs;
 
     private MultiLayerNetwork model = null;
+    private String apiUser;
+    private String apiPassword;
+
+    public NNHarmonicAlt(AppConfigs appConfigs, String apiUser, String apiPassword) {
+        this.appConfigs = appConfigs;
+        this.apiPassword = apiPassword;
+        this.apiUser = apiUser;
+    }
 
     public Integer trainHarmonicAltNetWork(float[] predictionInputs, String serverPort) throws URISyntaxException, IOException, InterruptedException {
 
@@ -61,7 +68,6 @@ public class NNHarmonicAlt {
 
             //Load the training data:
             RecordReader rr = new CSVRecordReader();
-            URL url = new URL("http://localhost:" + serverPort + "/harmalt/data");
 
             File tempFile;
             String OS = System.getProperty("os.name").toLowerCase();
@@ -79,7 +85,9 @@ public class NNHarmonicAlt {
 
             //tempFile.deleteOnExit();
             FileOutputStream out = new FileOutputStream(tempFile);
-            IOUtils.copy(url.openStream(), out);
+            HttpHelper httpHelper = new HttpHelper();
+            IOUtils.copy(httpHelper.getURLConnection("http://localhost:" + serverPort + "/harmalt/data", apiUser, apiPassword).getInputStream(), out);
+
 
             rr.initialize(new FileSplit(tempFile));
             DataSetIterator trainIter = new RecordReaderDataSetIterator(rr, batchSize, 0, 3);

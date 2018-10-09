@@ -35,7 +35,6 @@ import java.util.HashMap;
 
 import static com.treblemaker.model.IParametricEq.EqBand;
 
-@Component
 public class NNEq {
 
     private EqBandController eqBandController;

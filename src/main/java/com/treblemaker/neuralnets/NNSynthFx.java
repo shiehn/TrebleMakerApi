@@ -2,6 +2,7 @@ package com.treblemaker.neuralnets;
 
 import com.treblemaker.configs.AppConfigs;
 import com.treblemaker.controllers.classify.utils.ClassificationUtils;
+import com.treblemaker.utils.HttpHelper;
 import org.apache.commons.compress.utils.IOUtils;
 import org.datavec.api.records.reader.RecordReader;
 import org.datavec.api.records.reader.impl.csv.CSVRecordReader;
@@ -33,13 +34,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 
-@Component
 public class NNSynthFx {
 
-    @Autowired
     private AppConfigs appConfigs;
+    private String apiUser;
+    private String apiPassword;
 
     private HashMap<Integer, MultiLayerNetwork> nnMap = new HashMap<>();
+
+    public NNSynthFx(AppConfigs appConfigs, String apiUser, String apiPassword) {
+        this.appConfigs = appConfigs;
+        this.apiPassword = apiPassword;
+        this.apiUser = apiUser;
+    }
 
     public Integer trainNetWork(int synthid, float[] predictionInputs, String serverPort) throws URISyntaxException, IOException, InterruptedException {
 
@@ -55,7 +62,6 @@ public class NNSynthFx {
 
             //Load the training data:
             RecordReader rr = new CSVRecordReader();
-            URL url = new URL("http://localhost:" + serverPort + "/data/synthfx?synthid=" + synthid);
 
             File tempFile;
             String OS = System.getProperty("os.name").toLowerCase();
@@ -73,7 +79,9 @@ public class NNSynthFx {
 
             //tempFile.deleteOnExit();
             FileOutputStream out = new FileOutputStream(tempFile);
-            IOUtils.copy(url.openStream(), out);
+            HttpHelper httpHelper = new HttpHelper();
+            IOUtils.copy(httpHelper.getURLConnection("http://localhost:" + serverPort + "/data/synthfx?synthid=" + synthid, apiUser, apiPassword).getInputStream(), out);
+
 
             rr.initialize(new FileSplit(tempFile));
             DataSetIterator trainIter = new RecordReaderDataSetIterator(rr, batchSize, 0, 3);

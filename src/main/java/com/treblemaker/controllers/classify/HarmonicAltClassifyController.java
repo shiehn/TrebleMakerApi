@@ -1,11 +1,13 @@
 package com.treblemaker.controllers.classify;
 
+import com.treblemaker.configs.AppConfigs;
 import com.treblemaker.controllers.ControllerThreadSync;
 import com.treblemaker.controllers.data.HarmonicAltController;
 import com.treblemaker.controllers.singleton.NNSingelton;
 import com.treblemaker.neuralnets.NNHarmonicAlt;
 import com.treblemaker.providers.ConfigurationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +23,15 @@ public class HarmonicAltClassifyController extends NNBaseClass {
 
     @Autowired
     private ConfigurationProvider configurationProvider;
+
+    @Autowired
+    private AppConfigs appConfigs;
+
+    @Value("${tm.api.user}")
+    String apiUser;
+
+    @Value("${tm.api.pass}")
+    String apiPassword;
 
     @RequestMapping(value = "/classify/harmalt/{beat_loop_id}/{harmonic_loop_id}/{harmonic_loop_alt_id}/{synth_template_hi_id}/{synth_template_mid_id}/{synth_template_low_id}", method = RequestMethod.GET)
     public
@@ -40,7 +51,7 @@ public class HarmonicAltClassifyController extends NNBaseClass {
         synchronized (ControllerThreadSync.getInstance()) {
 
             if (NNSingelton.INSTANCE.nnHarmonicAlt == null) {
-                NNSingelton.INSTANCE.nnHarmonicAlt = new NNHarmonicAlt();
+                NNSingelton.INSTANCE.nnHarmonicAlt = new NNHarmonicAlt(appConfigs, apiUser, apiPassword);
             }
 
             float[] predictionInputs = harmonicAltController.createPrdectionRow(beatLoopId, harmonicLoopId, harmonicLoopAltId, synthHiId, synthMidId, synthTemplateLowId);

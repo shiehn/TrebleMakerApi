@@ -2,6 +2,8 @@ package com.treblemaker.neuralnets;
 
 import com.treblemaker.configs.AppConfigs;
 import com.treblemaker.controllers.classify.utils.ClassificationUtils;
+import com.treblemaker.utils.HttpHelper;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.compress.utils.IOUtils;
 import org.datavec.api.records.reader.RecordReader;
 import org.datavec.api.records.reader.impl.csv.CSVRecordReader;
@@ -26,19 +28,29 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-@Component
 public class NNArpeggio {
 
-    @Autowired
     private AppConfigs appConfigs;
 
     private MultiLayerNetwork model = null;
+
+    private String apiUser;
+    private String apiPassword;
+
+    public NNArpeggio(AppConfigs appConfigs, String apiUser, String apiPassword) {
+        this.appConfigs = appConfigs;
+        this.apiPassword = apiPassword;
+        this.apiUser = apiUser;
+    }
 
     public Integer trainArpeggioNetWork(float[] predictionInputs, String serverPort) throws URISyntaxException, IOException, InterruptedException {
 
@@ -55,7 +67,6 @@ public class NNArpeggio {
 
             //Load the training data:
             RecordReader rr = new CSVRecordReader();
-            URL url = new URL("http://localhost:" + serverPort + "/data/arpeggio");
 
             File tempFile;
             String OS = System.getProperty("os.name").toLowerCase();
@@ -73,7 +84,8 @@ public class NNArpeggio {
 
             //tempFile.deleteOnExit();
             FileOutputStream out = new FileOutputStream(tempFile);
-            IOUtils.copy(url.openStream(), out);
+            HttpHelper httpHelper = new HttpHelper();
+            IOUtils.copy(httpHelper.getURLConnection("http://localhost:" + serverPort + "/data/arpeggio", apiUser, apiPassword).getInputStream(), out);
 
             rr.initialize(new FileSplit(tempFile));
             DataSetIterator trainIter = new RecordReaderDataSetIterator(rr, batchSize, 0, 3);
