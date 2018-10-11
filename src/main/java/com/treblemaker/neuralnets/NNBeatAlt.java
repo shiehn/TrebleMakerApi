@@ -22,6 +22,7 @@ import org.nd4j.linalg.cpu.nativecpu.NDArray;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.client.support.BasicAuthorizationInterceptor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -54,6 +55,7 @@ public class NNBeatAlt {
 
             //get the number of inputs!!
             RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(apiUser, apiPassword));
             Integer inputs = restTemplate.getForObject("http://localhost:" + serverPort + "/beatalt/inputcount", Integer.class);
             System.out.println("INPUTS:" + inputs);
 
