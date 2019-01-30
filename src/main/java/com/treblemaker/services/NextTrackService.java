@@ -86,8 +86,9 @@ public class NextTrackService {
         Station station = stationDal.findById(stationId).get();
         List<StationTrack> uploadedTracks = station.getStationTracks().stream().filter(stationTrack -> stationTrack.getUploaded() == 1
                 && stationTrack.getAddToStation() == 1
-                && stationTrack.getNumOfVersions() > 1
-                && stationTrack.getNumOfVersionVariations() > 1
+                        && stationTrack.getApiVersion() == 2
+//                && stationTrack.getNumOfVersions() > 1
+//                && stationTrack.getNumOfVersionVariations() > 1
         ).collect(Collectors.toList());
 
         List<SentimentComposition> sentimentCompositions = sentimentCompositionDal.findAll();
