@@ -3,9 +3,11 @@
 //angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'ngRoute'])
 angular.module('myApp', ['myApp.filters', 'myApp.services', 'ngRoute'])
     .constant("CONST", {
-        "DOMAIN": "http://localhost:7777",
+        "DOMAIN": "",
+        // "DOMAIN": "http://localhost:7777",
 //        "DOMAIN": "http://34.215.102.197:8080",
-        "HIVE_COMPOSE_SERVER": "http://localhost:7777"
+        "HIVE_COMPOSE_SERVER": ""
+        // "HIVE_COMPOSE_SERVER": "http://localhost:7777"
 //        "HIVE_COMPOSE_SERVER": "http://34.214.119.140:8080"
     })
     .config(['$routeProvider', function($routeProvider) {
