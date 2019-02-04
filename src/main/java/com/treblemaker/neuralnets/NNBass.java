@@ -18,9 +18,11 @@ import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.nn.weights.WeightInit;
 import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
+import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.cpu.nativecpu.NDArray;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
+import org.nd4j.linalg.learning.config.Nesterovs;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -91,18 +93,16 @@ public class NNBass extends NNBaseClass {
 
             MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
                     .seed(seed)
-                    .iterations(4)
                     .optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
-                    .learningRate(learningRate)
-                    .updater(Updater.NESTEROVS).momentum(0.9)
+                    .updater(new Nesterovs(learningRate))
                     .list()
                     .layer(0, new DenseLayer.Builder().nIn(numInputs).nOut(numHiddenNodes)
                             .weightInit(WeightInit.XAVIER)
-                            .activation("relu")
+                            .activation(Activation.RELU)
                             .build())
                     .layer(1, new OutputLayer.Builder(LossFunctions.LossFunction.NEGATIVELOGLIKELIHOOD)
                             .weightInit(WeightInit.XAVIER)
-                            .activation("softmax").weightInit(WeightInit.XAVIER)
+                            .activation(Activation.SOFTMAX).weightInit(WeightInit.XAVIER)
                             .nIn(numHiddenNodes).nOut(numOutputs).build())
                     .pretrain(false).backprop(true).build();
 
